@@ -1,0 +1,177 @@
+/* === ОБЩИЕ СЕКЦИИ === */
+section {
+  padding: 80px 48px;
+  max-width: 1400;
+  margin: 0 auto;
+}
+
+.section-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  margin-bottom: 24px;
+  display: block;
+}
+
+/* === КАРТОЧКИ === */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.card {
+  background: var(--surface);
+  padding: 40px;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  background: var(--card-hover-bg);
+  transform: translateY(-4px);
+}
+
+@media (max-width: 900px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  section {
+    padding: 60px 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* === АНИМАЦИИ === */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === КОНТАКТЫ === */
+.contacts-section {
+  padding: 80px 48px;
+  margin: 0 auto;
+}
+
+.contacts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+
+.contact-block {
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  min-width: 280px;
+}
+
+.contact-block:hover {
+  border-color: var(--accent);
+  box-shadow: 0 8px 32px var(--contact-hover-shadow);
+  transform: translateY(-4px);
+}
+
+.contact-icon {
+  font-size: 24px;
+  margin-bottom: 12px;
+  color: var(--accent);
+}
+
+.contact-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.contact-value {
+  font-size: 15px;
+  color: var(--text);
+  word-break: break-word;
+}
+
+/* === АДАПТИВНОСТЬ КОНТАКТОВ === */
+@media (max-width: 900px) {
+  .contacts-section {
+    padding: 60px 24px;
+  }
+  
+  .contacts-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+  }
+  
+  .contact-block {
+    padding: 24px;
+    min-width: 250px;
+  }
+}
+
+@media (max-width: 600px) {
+  .contacts-section {
+    padding: 48px 24px;
+  }
+  
+  .contacts-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .contact-block {
+    padding: 20px;
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .contact-value {
+    font-size: 13px;
+  }
+}
+
+/* === ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ === */
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  cursor: pointer;
+  color: var(--text);
+  transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+}
+
+.theme-icon {
+  display: none;
+}
+
+[data-theme="dark"] .theme-icon.moon {
+  display: inline;
+}
+
+[data-theme="light"] .theme-icon.sun {
+  display: inline;
+}

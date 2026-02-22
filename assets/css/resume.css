@@ -1,0 +1,272 @@
+/* === СЕЛЕКТОР АУДИТОРИЙ === */
+.selector-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 48px;
+}
+
+.selector-card {
+  background: var(--surface);
+  padding: 40px 32px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.selector-card:hover {
+  background: var(--card-hover-bg);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px var(--card-hover-shadow);
+}
+
+.selector-card .card-number {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.selector-card .card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.selector-card .card-time {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+}
+
+.selector-card .card-focus {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 12px;
+  display: block;
+}
+
+/* === СТРАНИЦЫ АУДИТОРИЙ === */
+.audience-header {
+  padding: 160px 48px 80px;
+  border-bottom: 1px solid var(--border);
+}
+
+.audience-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.audience-time {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* === НАВЫКИ === */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin: 48px 0;
+}
+
+.skill-category {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 32px;
+}
+
+.skill-category h3 {
+  font-size: 16px;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  padding: 6px 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+/* === TIMELINE === */
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin: 48px 0;
+}
+
+.timeline-item {
+  background: var(--surface);
+  padding: 32px;
+}
+
+.timeline-period {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--accent);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.timeline-stage {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.timeline-tasks {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* === ПРИНЦИПЫ === */
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin: 48px 0;
+}
+
+.principle-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 32px;
+}
+
+.principle-number {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--accent);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.principle-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.principle-desc {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* === РИСКИ === */
+.risks-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 48px 0;
+}
+
+.risk-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.risk-name {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.risk-level {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 2px;
+}
+
+.risk-level.high {
+  background: rgba(245, 66, 66, 0.1);
+  color: #f54242;
+}
+
+.risk-level.medium {
+  background: rgba(200, 245, 66, 0.1);
+  color: #c8f542;
+}
+
+.risk-level.low {
+  background: rgba(66, 245, 200, 0.1);
+  color: #42f5c8;
+}
+
+/* === ФОРМАТ РАБОТЫ === */
+.format-grid {
+  display: flex;
+  gap: 16px;
+  margin: 32px 0;
+}
+
+.format-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.format-check {
+  color: var(--accent);
+}
+
+.format-cross {
+  color: var(--muted);
+}
+
+/* === АДАПТИВНОСТЬ === */
+@media (max-width: 900px) {
+  .selector-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .skills-grid,
+  .principles-grid,
+  .timeline-grid,
+  .risks-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .selector-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .audience-header {
+    padding: 120px 24px 60px;
+  }
+  
+  section {
+    padding: 60px 24px;
+  }
+}
