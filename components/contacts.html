@@ -1,37 +1,54 @@
 <!-- ════════════════════════════════════════════════════════════════════════════
-     ProjectWB — Contacts Component
-     Загружается динамически из data/content.json
+     ProjectWB — Contacts Component v2.1
+     Исправление: BUG-005 (контакты не отображаются)
      ════════════════════════════════════════════════════════════════════════════ -->
 
-<section class="contacts-section">
+<section class="contacts-section" id="contacts-container">
   <div class="container">
     <span class="section-eyebrow">◆ Контакты</span>
     
     <div id="contactsGrid" class="contacts-grid">
       <!-- Контакты загружаются из content.json через app.js -->
+      <div class="contacts-loading">Загрузка контактов...</div>
     </div>
   </div>
 </section>
 
 <script>
-  // Загрузка контактов из JSON
+  // Загрузка контактов из JSON (BUG-005)
   (async function() {
     try {
-      const response = await fetch('{{ROOT}}data/content.json');
+      // Определяем правильный путь к JSON
+      let jsonPath = '{{ROOT}}data/content.json';
+      if (window.location.pathname.includes('/pages/')) {
+        jsonPath = '../../data/content.json';
+      }
+      
+      const response = await fetch(jsonPath);
       const data = await response.json();
       
       const contactsGrid = document.getElementById('contactsGrid');
       if (contactsGrid && data.contacts) {
-        contactsGrid.innerHTML = data.contacts.map(contact => `
-          <a href="${contact.link}" class="contact-block" target="_blank" rel="noopener noreferrer">
-            <span class="contact-icon">${contact.icon}</span>
-            <span class="contact-label">${contact.label}</span>
-            <span class="contact-value">${contact.value}</span>
-          </a>
-        `).join('');
+        contactsGrid.innerHTML = data.contacts.map(contact => {
+          // Обработка CV-заглушки
+          const isCV = contact.type === 'cv';
+          const clickHandler = isCV ? 'onclick="event.preventDefault(); alert(\'⚠️ Резюме в разработке\\n\\nФайл CV будет доступен в ближайшее время.\');"' : '';
+          
+          return `
+            <a href="${contact.link}" class="contact-block" ${isCV ? clickHandler : ''} target="${isCV ? '_self' : '_blank'}" rel="noopener noreferrer">
+              <span class="contact-icon">${contact.icon}</span>
+              <span class="contact-label">${contact.label}</span>
+              <span class="contact-value">${contact.value}</span>
+            </a>
+          `;
+        }).join('');
       }
     } catch (error) {
       console.error('Ошибка загрузки контактов:', error);
+      const contactsGrid = document.getElementById('contactsGrid');
+      if (contactsGrid) {
+        contactsGrid.innerHTML = '<div class="contacts-error">Не удалось загрузить контакты</div>';
+      }
     }
   })();
 </script>

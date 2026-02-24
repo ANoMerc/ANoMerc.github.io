@@ -1,0 +1,211 @@
+/* ════════════════════════════════════════════════════════════════════════════
+NCOM Calculator Styles v1.0
+════════════════════════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+--bg: #0a0a0b; --surface: #111113; --border: #1e1e22; --border-bright: #2e2e36;
+--text: #e8e8ee; --muted: #5a5a6e; --accent: #c8f542; --accent2: #42f5c8;
+--accent3: #f54242; --accent4: #f5d442; --accent5: #f542c8;
+--mono: 'Space Mono', monospace; --sans: 'Syne', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); overflow-x: hidden; cursor: none; }
+/* ── Курсор ── */
+.cursor, .cursor-ring { position: fixed; border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); z-index: 9998; }
+.cursor      { width: 8px;  height: 8px;  background: var(--accent); z-index: 9999; transition: width .2s, height .2s; }
+.cursor-ring { width: 32px; height: 32px; border: 1px solid rgba(200,245,66,.4); transition: width .3s, height .3s; }
+a, button, select, input, label, .accordion-header { cursor: none !important; }
+/* ── Навигация ── */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 24px 48px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid transparent; transition: border-color .3s, background .3s; }
+nav.scrolled { border-color: var(--border); background: rgba(10,10,11,.92); backdrop-filter: blur(12px); }
+.nav-logo { font-family: var(--mono); font-size: 18px; font-weight: 700; color: var(--text); text-decoration: none; }
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a { font-family: var(--mono); font-size: 12px; color: var(--muted); text-decoration: none; letter-spacing: .08em; text-transform: uppercase; transition: color .2s; }
+.nav-links a:hover { color: var(--accent); }
+/* ── Секция ── */
+section { padding: 120px 48px; border-top: 1px solid var(--border); }
+.section-eyebrow { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: .15em; text-transform: uppercase; margin-bottom: 16px; }
+/* ИЗМЕНЕНИЕ: Уменьшен отступ снизу у заголовка (было 60px → теперь 32px) */
+h2 { font-size: clamp(30px, 3.5vw, 52px); font-weight: 800; letter-spacing: -.03em; line-height: 1.05; margin-bottom: 32px; }
+/* ── Сетка калькулятора ── */
+.calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); margin-bottom: 40px; }
+.calc-panel { background: var(--surface); padding: 40px; position: relative; }
+.panel-label { position: absolute; top: 0; left: 20px; background: var(--surface); font-family: var(--mono); font-size: 10px; color: var(--accent); padding: 0 8px; transform: translateY(-50%); letter-spacing: .1em; text-transform: uppercase; }
+/* ── Формы ── */
+.form-group { margin-bottom: 24px; }
+.form-label { display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 12px; }
+.form-value { color: var(--accent); }
+.form-hint { font-family: var(--mono); font-size: 9px; color: var(--muted); margin-top: 6px; display: block; }
+input[type="number"],
+input[type="text"],
+select {
+-webkit-appearance: none; appearance: none;
+width: 100%; background: var(--bg); border: 1px solid var(--border-bright);
+color: var(--text); font-family: var(--mono); font-size: 13px;
+padding: 12px 14px; border-radius: 0; outline: none; transition: border-color .2s;
+}
+input[type="number"]:focus,
+input[type="text"]:focus,
+select:focus { border-color: var(--accent); }
+input::placeholder { color: var(--muted); }
+/* ── Чекбоксы ── */
+.checkbox-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.checkbox-item { display: flex; align-items: flex-start; gap: 10px; padding: 11px; background: var(--bg); border: 1px solid var(--border-bright); transition: border-color .2s; }
+.checkbox-item:hover { border-color: var(--accent); }
+.checkbox-item input[type="checkbox"] { -webkit-appearance: none; appearance: none; width: 15px; height: 15px; min-width: 15px; border: 1px solid var(--border-bright); background: var(--bg); position: relative; margin-top: 1px; transition: background .15s, border-color .15s; }
+.checkbox-item input[type="checkbox"]:checked { background: var(--accent); border-color: var(--accent); }
+.checkbox-item input[type="checkbox"]:checked::after { content: '✓'; position: absolute; color: #000; font-size: 11px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.checkbox-label { font-family: var(--mono); font-size: 11px; color: var(--text); line-height: 1.4; }
+.checkbox-hint  { font-family: var(--mono); font-size: 9px; color: var(--muted); display: block; margin-top: 3px; }
+/* ── Ошибки ── */
+.error-message { color: var(--accent3); font-family: var(--mono); font-size: 11px; margin-top: 6px; display: none; }
+.form-group.error input { border-color: var(--accent3); }
+.form-group.error .error-message { display: block; }
+.compatibility-warning { background: rgba(245,212,66,.1); border: 1px solid var(--accent4); padding: 10px; margin-top: 10px; font-family: var(--mono); font-size: 10px; color: var(--accent4); display: none; }
+.compatibility-warning.visible { display: block; }
+/* ── Кнопки ── */
+.btn-primary, .btn-secondary, .btn-export, .btn-toggle {
+-webkit-appearance: none; appearance: none;
+display: inline-flex; align-items: center; justify-content: center;
+font-family: var(--mono); font-size: 13px; font-weight: 700;
+padding: 14px 28px; letter-spacing: .04em; transition: all .2s;
+border: none; margin-bottom: 0;
+}
+.btn-primary   { background: var(--accent);  color: #000; width: 100%; margin-top: 16px; }
+.btn-primary:hover:not(:disabled) { background: #d4ff55; transform: translateY(-2px); }
+.btn-primary:disabled { background: var(--border-bright); color: var(--muted); pointer-events: none; }
+.btn-secondary { background: var(--bg); color: var(--text); border: 1px solid var(--border-bright); }
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+.btn-export { background: var(--bg); color: var(--accent2); border: 1px solid var(--border-bright); font-size: 11px; padding: 10px 16px; }
+.btn-export:hover { border-color: var(--accent2); }
+.btn-toggle { background: var(--bg); color: var(--muted); border: 1px solid var(--border-bright); font-size: 11px; padding: 9px 18px; }
+.btn-toggle.active { background: var(--accent); color: #000; border-color: var(--accent); }
+/* ── Роли команды ── */
+.team-roles-container { display: flex; flex-direction: column; gap: 10px; }
+.team-role-item { background: var(--bg); border: 1px solid var(--border-bright); padding: 12px; transition: border-color .2s; }
+.team-role-item:hover { border-color: var(--border-bright); }
+.role-row-main { display: grid; grid-template-columns: 2fr 1fr 60px 34px; gap: 6px; align-items: center; margin-bottom: 7px; }
+.role-row-extra { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.team-role-item select,
+.team-role-item input[type="number"],
+.team-role-item input[type="text"] { padding: 8px 10px; font-size: 12px; }
+.btn-role-remove {
+-webkit-appearance: none; appearance: none;
+background: transparent; border: 1px solid var(--accent3); color: var(--accent3);
+font-family: var(--mono); font-size: 12px; font-weight: 700;
+padding: 0; width: 34px; height: 34px;
+display: flex; align-items: center; justify-content: center;
+transition: all .2s;
+}
+.btn-role-remove:hover { background: var(--accent3); color: #000; }
+/* ── Артефакты ── */
+.artifact-section { margin: 8px 0 24px; }
+.phase-tabs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); margin-bottom: 0; }
+.phase-tab {
+-webkit-appearance: none; appearance: none;
+background: var(--bg); border: none;
+padding: 11px 6px; font-family: var(--mono); font-size: 9px;
+color: var(--muted); text-transform: uppercase; text-align: center;
+transition: background .2s, color .2s; line-height: 1.3;
+}
+.phase-tab:hover { background: var(--surface); color: var(--text); }
+.phase-tab.active { background: var(--accent); color: #000; font-weight: 700; }
+.phase-count { display: block; font-size: 14px; font-weight: 700; margin-top: 3px; color: inherit; }
+.phase-tab.active .phase-count { color: #000; }
+.phase-content { display: none; border: 1px solid var(--border-bright); border-top: none; }
+.phase-content.active { display: block; animation: fadeIn .25s ease; }
+.artifact-list {
+display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+padding: 12px; background: var(--bg);
+max-height: 240px; overflow-y: auto;
+}
+.artifact-list::-webkit-scrollbar { width: 3px; }
+.artifact-list::-webkit-scrollbar-track { background: var(--bg); }
+.artifact-list::-webkit-scrollbar-thumb { background: var(--border-bright); }
+.artifact-item {
+display: flex; align-items: center; gap: 7px;
+font-family: var(--mono); font-size: 11px; color: var(--muted);
+padding: 8px 10px; background: var(--surface);
+border: 1px solid transparent; border-left: 2px solid transparent;
+transition: all .18s; position: relative;
+}
+.artifact-item:hover { border-color: rgba(200,245,66,.25); color: var(--text); }
+.artifact-item.selected { color: var(--accent); border-color: rgba(200,245,66,.3); background: rgba(200,245,66,.04); }
+.artifact-item.recommended { border-left-color: var(--accent); }
+.artifact-item.recommended.selected { background: rgba(200,245,66,.07); }
+.artifact-checkbox { display: none; }
+.artifact-item::before { content: '□'; color: var(--border-bright); flex-shrink: 0; font-size: 13px; }
+.artifact-item.selected::before { content: '■'; color: var(--accent); }
+.artifact-name { flex: 1; line-height: 1.4; }
+.artifact-rec-badge {
+font-family: var(--mono); font-size: 8px; letter-spacing: .06em;
+text-transform: uppercase; color: var(--accent); opacity: .7;
+white-space: nowrap; flex-shrink: 0;
+}
+/* ИЗМЕНЕНИЕ: Добавлен отступ снизу для контейнера экспертного режима */
+section > .artifact-actions { margin-bottom: 20px; }
+.artifact-actions { display: flex; gap: 8px; padding: 10px 0 0; }
+.artifact-summary { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-top: 9px; }
+.artifact-summary span { color: var(--accent); font-weight: 700; }
+/* ── Аккордеон ── */
+.accordion { border: 1px solid var(--border-bright); margin: 24px 0 16px; }
+.accordion-header {
+background: var(--bg); padding: 15px 18px;
+font-family: var(--mono); font-size: 12px; color: var(--text);
+display: flex; justify-content: space-between; align-items: center;
+transition: background .2s;
+}
+.accordion-header:hover { background: var(--surface); }
+.accordion-arrow { color: var(--accent); font-size: 16px; }
+.accordion-content { padding: 20px; background: var(--surface); display: none; }
+.accordion-content.active { display: block; }
+/* ── Результаты ── */
+.result-container { background: var(--surface); border: 1px solid var(--border); padding: 40px 36px; position: relative; margin-top: 1px; }
+.result-container::before { content: '// output.stream'; position: absolute; top: 0; left: 20px; background: var(--surface); font-family: var(--mono); font-size: 11px; color: var(--accent2); padding: 0 8px; transform: translateY(-50%); }
+.result-value { font-family: var(--mono); font-size: clamp(22px, 3.5vw, 40px); font-weight: 700; color: var(--accent2); margin-bottom: 8px; line-height: 1.2; }
+.result-sub { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-bottom: 24px; }
+.user-journey { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--border); }
+.journey-card { background: var(--bg); padding: 20px; text-align: center; }
+.journey-card h4 { font-family: var(--mono); font-size: 10px; color: var(--muted); text-transform: uppercase; margin-bottom: 10px; }
+.journey-value { font-family: var(--mono); font-size: 18px; font-weight: 700; }
+.journey-card.optimistic  .journey-value { color: var(--accent2); }
+.journey-card.base        .journey-value { color: var(--accent);  }
+.journey-card.pessimistic .journey-value { color: var(--accent3); }
+.role-loading-bars { display: flex; flex-direction: column; gap: 9px; }
+.role-loading-bar { display: flex; align-items: center; gap: 12px; }
+.role-loading-label { font-family: var(--mono); font-size: 10px; color: var(--muted); min-width: 200px; flex: 1; }
+.role-loading-label em { font-style: normal; }
+.role-loading-track { width: 120px; height: 6px; background: var(--bg); border: 1px solid var(--border-bright); flex-shrink: 0; }
+.role-loading-fill { height: 100%; background: var(--accent); transition: width .3s; }
+.role-loading-value { font-family: var(--mono); font-size: 10px; color: var(--text); white-space: nowrap; }
+/* ── Радар ── */
+.radar-container { margin: 32px 0 0; padding: 22px; background: var(--bg); border: 1px solid var(--border-bright); }
+.radar-title { font-family: var(--mono); font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 14px; }
+.radar-svg { width: 100%; max-width: 380px; margin: 0 auto; display: block; }
+.radar-legend { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 14px; }
+.radar-legend-item { font-family: var(--mono); font-size: 9px; color: var(--muted); text-align: center; line-height: 1.5; }
+.radar-legend-item span { display: block; font-size: 13px; font-weight: 700; margin-top: 3px; }
+/* ── Warning ── */
+.warning-box { padding: 14px 16px; border: 1px dashed var(--accent3); font-family: var(--mono); font-size: 10px; color: var(--accent3); background: rgba(245,66,66,.04); }
+/* ── Анимации ── */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+/* ── Мобильная адаптация ── */
+@media (max-width: 900px) {
+nav { padding: 20px 24px; }
+.nav-links { display: none; }
+section { padding: 80px 24px; }
+.calc-grid { grid-template-columns: 1fr; }
+.artifact-list { grid-template-columns: 1fr; }
+.user-journey { grid-template-columns: 1fr; }
+.checkbox-group { grid-template-columns: 1fr; }
+.radar-legend { grid-template-columns: repeat(3, 1fr); }
+.phase-tabs { grid-template-columns: repeat(3, 1fr); }
+.role-row-main { grid-template-columns: 1fr 1fr 50px 34px; }
+.role-row-extra { grid-template-columns: 1fr; }
+.role-loading-bar { flex-wrap: wrap; }
+.role-loading-label { min-width: 100%; }
+.role-loading-track { width: 100%; }
+}

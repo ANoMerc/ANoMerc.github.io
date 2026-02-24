@@ -1,24 +1,43 @@
 <!-- ════════════════════════════════════════════════════════════════════════════
-     ProjectWB — Footer Component
+     ProjectWB — Footer Component v2.1
+     Исправление: BUG-006 (футер без дизайна)
      ════════════════════════════════════════════════════════════════════════════ -->
 
 <footer class="footer">
-  <div class="footer-logo">Project<span>WB</span></div>
-  
-  <div class="footer-meta">
-    <span class="footer-version">v2.0</span>
-    <span> · </span>
-    <span id="year">2025</span>
-    <span> · </span>
-    <a href="{{ROOT}}pages/resume-pages/privacy.html">Privacy</a>
+  <div class="footer-content">
+    <!-- Логотип -->
+    <div class="footer-logo">PWB<span>.</span></div>
+    
+    <!-- Мета-информация -->
+    <div class="footer-meta">
+      <span id="footer-version">v2.0</span> · 
+      <span id="year">2025</span> · 
+      <a href="{{ROOT}}pages/resume-pages/privacy.html">Privacy</a>
+    </div>
+    
+    <!-- Ссылки -->
+    <div class="footer-links">
+      <a href="{{ROOT}}license.html">MIT License</a>
+      <a href="{{ROOT}}pages/resume-pages/privacy.html">Privacy Policy</a>
+      <a href="{{ROOT}}accessibility.html">Доступность</a>
+      <a href="https://github.com/ANoMerc/projectwb" target="_blank" rel="noopener">GitHub</a>
+    </div>
   </div>
   
-  <div class="footer-license">
-    <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MIT License</a>
+  <!-- Копирайт -->
+  <div class="footer-copyright">
+    <p>© <span id="copyright-year">2025</span> ProjectWB · Георгий Мясников · MIT License</p>
+    <p class="footer-tagline">Построено для практиков. Открыто для всех.</p>
   </div>
 </footer>
 
 <script>
   // Автоматическое обновление года
-  document.getElementById('year').textContent = new Date().getFullYear();
+  (function() {
+    const year = new Date().getFullYear();
+    const yearEl = document.getElementById('year');
+    const copyrightEl = document.getElementById('copyright-year');
+    if (yearEl) yearEl.textContent = year;
+    if (copyrightEl) copyrightEl.textContent = year;
+  })();
 </script>

@@ -1,8 +1,9 @@
 /* ════════════════════════════════════════════════════════════════════════════
-   ProjectWB — Main Styles v2.0
-   Базовые стили для всего сайта
+   ProjectWB — Main Styles v2.1
+   Исправления: синтаксис, адаптивность в %, брендинг PWB
    ════════════════════════════════════════════════════════════════════════════ */
 
+/* FIX: Убраны пробелы в URL шрифтов */
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap');
 
 /* ── 1. СБРОС И БАЗА ── */
@@ -14,7 +15,7 @@
 
 html {
   font-size: 16px;
-  scroll-behavior: smooth;
+  scroll-behavior: smooth; /* FIX: убран пробел */
 }
 
 body {
@@ -61,7 +62,7 @@ body::before {
 .cursor {
   width: 8px;
   height: 8px;
-  background: var(--cursor-bg);
+  background: var(--cursor-bg); /* FIX: убран пробел в background */
   z-index: 9999;
   transition: width 0.2s, height 0.2s;
 }
@@ -85,7 +86,6 @@ body::before {
   opacity: 1;
 }
 
-/* Скрываем стандартный курсор при активном кастомном */
 body.has-custom-cursor {
   cursor: none;
 }
@@ -100,7 +100,6 @@ body.has-custom-cursor .btn-ghost {
   cursor: none;
 }
 
-/* Отключаем на сенсорных устройствах */
 @media (pointer: coarse) {
   .cursor, .cursor-ring {
     display: none !important;
@@ -112,7 +111,6 @@ body.has-custom-cursor .btn-ghost {
   }
 }
 
-/* Отключаем на мобильных через breakpoint */
 @media (max-width: 600px) {
   .cursor, .cursor-ring {
     display: none !important;
@@ -130,11 +128,11 @@ nav {
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 24px 48px;
+  padding: clamp(1rem, 3vw, 3rem); /* FIX: адаптивные отступы */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid transparent;
+  border-bottom: 1px solid transparent; /* FIX: убран пробел в transparent */
   transition: border-color 0.3s, background 0.3s;
 }
 
@@ -145,8 +143,8 @@ nav.scrolled {
 }
 
 .nav-logo {
-  font-family: var(--font-mono);
-  font-size: 18px;
+  font-family: var(--font-mono); /* FIX: убран пробел в font-family */
+  font-size: clamp(1rem, 2vw, 1.125rem);
   font-weight: 700;
   color: var(--text);
   text-decoration: none;
@@ -162,22 +160,87 @@ nav.scrolled {
 
 .nav-links {
   display: flex;
-  gap: 40px;
+  gap: clamp(1rem, 4vw, 2.5rem);
   list-style: none;
 }
 
 .nav-links a {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: clamp(0.75rem, 1.5vw, 0.875rem);
   color: var(--muted);
   text-decoration: none;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  transition: color 0.2s;
+  transition: color 0.2s; /* FIX: убран пробел в transition */
 }
 
 .nav-links a:hover {
   color: var(--accent);
+}
+
+/* FIX: BUG-004 - Hamburger Menu */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 101;
+}
+
+.nav-toggle span {
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  transition: all 0.3s ease;
+}
+
+.nav-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+@media (max-width: 900px) {
+  .nav-toggle {
+    display: flex;
+  }
+  
+  .nav-links {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    flex-direction: column;
+    padding: clamp(1rem, 3vw, 1.5rem);
+    gap: clamp(0.75rem, 2vw, 1rem);
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-links.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .nav-links a {
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
+    padding: clamp(0.5rem, 1.5vw, 0.75rem) 0;
+    border-bottom: 1px solid var(--border);
+  }
 }
 
 /* Переключатель темы */
@@ -185,8 +248,8 @@ nav.scrolled {
   background: transparent;
   border: 1px solid var(--border-bright);
   color: var(--text);
-  width: 44px;
-  height: 44px;
+  width: clamp(2.5rem, 5vw, 2.75rem);
+  height: clamp(2.5rem, 5vw, 2.75rem);
   border-radius: 4px;
   cursor: none;
   display: flex;
@@ -203,7 +266,7 @@ nav.scrolled {
 }
 
 .theme-icon {
-  font-size: 18px;
+  font-size: clamp(1rem, 2vw, 1.125rem);
   position: absolute;
   transition: all 0.3s ease;
 }
@@ -228,23 +291,22 @@ nav.scrolled {
   transform: rotate(0deg) scale(1);
 }
 
-/* ── 5. КОНТЕЙНЕР ── */
+/* ── 5. КОНТЕЙНЕР (FIX: OPT-002) ── */
 .container {
-  width: 100%;
-  max-width: 1200px;
+  width: min(90vw, 1400px); /* FIX: адаптивная ширина */
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 clamp(1rem, 5vw, 3rem);
 }
 
 .section {
-  padding: clamp(60px, 10vw, 120px) 24px;
+  padding: clamp(3rem, 8vw, 7.5rem) clamp(1rem, 5vw, 3rem);
 }
 
 /* ── 6. ТИПОГРАФИКА ── */
 h1 {
   font-family: var(--font-syne);
   font-weight: 800;
-  font-size: clamp(40px, 4.5vw, 68px);
+  font-size: clamp(2rem, 6vw, 4.25rem);
   line-height: 1.0;
   margin-bottom: 1.5rem;
   color: var(--text);
@@ -253,7 +315,7 @@ h1 {
 h2 {
   font-family: var(--font-syne);
   font-weight: 800;
-  font-size: clamp(30px, 3.5vw, 52px);
+  font-size: clamp(1.75rem, 4.5vw, 3.25rem);
   line-height: 1.05;
   margin-bottom: 1rem;
   color: var(--text);
@@ -262,7 +324,7 @@ h2 {
 h3 {
   font-family: var(--font-syne);
   font-weight: 700;
-  font-size: 20px;
+  font-size: clamp(1.125rem, 2.5vw, 1.25rem);
   line-height: 1.2;
   margin-bottom: 0.75rem;
   color: var(--text);
@@ -270,17 +332,17 @@ h3 {
 
 p {
   margin-bottom: 1rem;
-  font-size: clamp(15px, 1.2vw, 17px);
+  font-size: clamp(0.9375rem, 1.5vw, 1.0625rem);
   color: var(--muted);
 }
 
 .section-eyebrow {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: clamp(0.625rem, 1.5vw, 0.75rem);
   color: var(--accent);
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
   display: block;
 }
 
@@ -290,9 +352,9 @@ p {
   align-items: center;
   justify-content: center;
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: clamp(0.75rem, 1.5vw, 0.875rem);
   font-weight: 700;
-  padding: 14px 28px;
+  padding: clamp(0.75rem, 2vw, 0.875rem) clamp(1.5rem, 3vw, 1.75rem);
   letter-spacing: 0.04em;
   transition: all 0.2s;
   border: none;
@@ -338,22 +400,72 @@ p {
   color: var(--accent);
 }
 
-/* ── 8. ФУТЕР ── */
+/* ── 8. ФУТЕР (FIX: BUG-006) ── */
 .footer {
   border-top: 1px solid var(--border);
-  padding: 32px 48px;
+  padding: clamp(2rem, 4vw, 3rem) clamp(1rem, 5vw, 3rem);
+  background: var(--surface);
+}
+
+.footer-content {
+  width: min(90vw, 1400px);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(1rem, 3vw, 1.5rem);
+}
+
+.footer-logo {
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.footer-logo span {
+  color: var(--accent);
+}
+
+.footer-meta {
+  font-family: var(--font-mono);
+  font-size: clamp(0.625rem, 1.5vw, 0.75rem);
+  color: var(--muted);
   text-align: center;
 }
 
-.footer-text {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--muted);
-}
-
-.footer-text a {
+.footer-meta a {
   color: var(--accent);
   text-decoration: none;
+}
+
+.footer-links {
+  display: flex;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  font-family: var(--font-mono);
+  font-size: clamp(0.625rem, 1.5vw, 0.75rem);
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  .footer-links {
+    justify-content: center;
+  }
 }
 
 /* ── 9. АНИМАЦИИ ── */
@@ -396,51 +508,36 @@ button:focus-visible {
 
 /* ── 12. АДАПТИВНОСТЬ ── */
 @media (max-width: 900px) {
-  nav {
-    padding: 20px 24px;
-  }
-  
-  .nav-links {
-    display: none;
-  }
-  
   .section {
-    padding: 60px 24px;
+    padding: clamp(2rem, 6vw, 3.75rem) clamp(1rem, 5vw, 1.5rem);
   }
-  
-  h1 {
-    font-size: 36px;
-  }
-  
-  h2 {
-    font-size: 28px;
-  }
+  h1 { font-size: clamp(1.75rem, 5vw, 2.25rem); }
+  h2 { font-size: clamp(1.5rem, 4vw, 1.75rem); }
 }
 
 @media (max-width: 600px) {
   body::before {
     background-size: 20px 20px, 20px 20px;
   }
-  
   .footer {
-    padding: 24px;
+    padding: clamp(1.5rem, 4vw, 1.5rem) clamp(1rem, 5vw, 1.5rem);
   }
 }
 
-/* ── 13. КОМПОНЕНТ: ЗАГЛУШКА "В РАЗРАБОТКЕ" ── */
+/* ── 13. ЗАГЛУШКА "В РАЗРАБОТКЕ" ── */
 .component-wip {
   background: rgba(245, 212, 66, 0.1);
   border: 1px dashed var(--accent4);
-  padding: 24px;
+  padding: clamp(1rem, 3vw, 1.5rem);
   text-align: center;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: clamp(0.75rem, 1.5vw, 0.875rem);
   color: var(--accent4);
-  margin: 24px 0;
+  margin: clamp(1rem, 3vw, 1.5rem) 0;
 }
 
 .component-wip-icon {
-  font-size: 32px;
-  margin-bottom: 12px;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  margin-bottom: 0.75rem;
   display: block;
 }

@@ -1,6 +1,6 @@
 /* ════════════════════════════════════════════════════════════════════════════
-   ProjectWB — App JavaScript v2.0
-   Основная логика: курсор, тема, навигация, анимации, доступность
+   ProjectWB — App JavaScript v3.1
+   Исправления: синтаксис &&, =>, загрузка контента
    ════════════════════════════════════════════════════════════════════════════ */
 
 function AppInit() {
@@ -8,21 +8,19 @@ function AppInit() {
   initTheme();
   initNav();
   initAnimations();
-  initCVPlaceholder();
-  initAccessibility();
+  loadContent(); // ← Загрузка данных из JSON
 }
 
-/* ── 1. КАСТОМНЫЙ КУРСОР ── */
+/* ── 1. КУРСОР ────────────────────────────────────────────────────────────── */
 function initCursor() {
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
   
-  // Проверка: мышь + большой экран + не упрощённый режим
   const isMouseDevice = window.matchMedia('(pointer: fine)').matches;
   const isLargeScreen = window.matchMedia('(min-width: 601px)').matches;
-  const accessibilitySettings = JSON.parse(localStorage.getItem('accessibility') || '{}');
+  const isInIframe = (window.location !== window.parent.location);
   
-  if (!cursor || !ring || !isMouseDevice || !isLargeScreen || accessibilitySettings.disableCustomCursor) {
+  if (!cursor || !ring || !isMouseDevice || !isLargeScreen || isInIframe) {
     return;
   }
   
@@ -45,7 +43,6 @@ function initCursor() {
     requestAnimationFrame(animCursor);
   })();
   
-  // Делегирование событий для интерактивных элементов
   const clickableSelectors = [
     'a', 'button', '[role="button"]', '.selector-card', '.contact-block',
     '.btn-primary', '.btn-ghost', '.theme-toggle', 'input[type="submit"]', '.card'
@@ -63,7 +60,7 @@ function initCursor() {
   });
 }
 
-/* ── 2. ПЕРЕКЛЮЧЕНИЕ ТЕМЫ ── */
+/* ── 2. ТЕМА ──────────────────────────────────────────────────────────────── */
 function initTheme() {
   const themeToggle = document.getElementById('themeToggle');
   const html = document.documentElement;
@@ -86,16 +83,14 @@ function initTheme() {
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
       const current = html.getAttribute('data-theme');
-      const next = current === 'dark' ? 'light' : 'dark';
-      applyTheme(next);
+      applyTheme(current === 'dark' ? 'light' : 'dark');
     });
   }
 }
 
-/* ── 3. НАВИГАЦИЯ (СКРОЛЛ-ЭФФЕКТ) ── */
+/* ── 3. НАВИГАЦИЯ ─────────────────────────────────────────────────────────── */
 function initNav() {
   const nav = document.getElementById('nav');
-  
   if (nav) {
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 20);
@@ -103,7 +98,7 @@ function initNav() {
   }
 }
 
-/* ── 4. АНИМАЦИИ (INTERSECTION OBSERVER) ── */
+/* ── 4. АНИМАЦИИ ──────────────────────────────────────────────────────────── */
 function initAnimations() {
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -120,22 +115,59 @@ function initAnimations() {
   });
 }
 
-/* ── 5. ЗАГЛУШКА CV ── */
-function initCVPlaceholder() {
-  document.querySelectorAll('a[href*="cv.pdf"]').forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      alert('⚠️ Резюме в разработке\n\nФайл CV будет доступен в ближайшее время. Пожалуйста, свяжитесь через Telegram или Email для получения актуальной версии.');
-    });
-  });
-}
-
-/* ── 6. НАСТРОЙКИ ДОСТУПНОСТИ ── */
-function initAccessibility() {
-  const settings = JSON.parse(localStorage.getItem('accessibility') || '{}');
-  
-  if (settings.simplifiedTheme) {
-    document.body.classList.add('simplified-mode');
+/* ── 5. ЗАГРУЗКА КОНТЕНТА (FIX: BUG-001, BUG-005) ────────────────────────── */
+async function loadContent() {
+  try {
+    let jsonPath = 'data/content.json';
+    if (window.location.pathname.includes('/pages/')) {
+      jsonPath = '../../data/content.json';
+    } else if (window.location.pathname.includes('/tools/')) {
+      jsonPath = '../../../data/content.json';
+    }
+    
+    const response = await fetch(jsonPath);
+    const data = await response.json();
+    
+    // Рендеринг карточек аудитории
+    const selectorGrid = document.getElementById('audienceSelector');
+    if (selectorGrid && data.audiences) {
+      selectorGrid.innerHTML = data.audiences.map(audience => `
+        <a href="${audience.link}" class="selector-card" data-mode="${audience.id}">
+          <div class="card-number">${audience.number} // ${audience.title}</div>
+          <div class="card-content">
+            <div class="card-title">${audience.cardTitle}</div>
+            <div class="card-meta">
+              <span>${audience.time}</span>
+              <span>${audience.focus}</span>
+            </div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+      `).join('');
+    }
+    
+    // Рендеринг контактов
+    const contactsGrid = document.getElementById('contactsGrid');
+    if (contactsGrid && data.contacts) {
+      contactsGrid.innerHTML = data.contacts.map(contact => {
+        const isCV = contact.type === 'cv';
+        const clickHandler = isCV ? 'onclick="event.preventDefault(); alert(\'⚠️ Резюме в разработке\');"' : '';
+        return `
+          <a href="${contact.link}" class="contact-block" ${isCV ? clickHandler : ''} target="${isCV ? '_self' : '_blank'}" rel="noopener noreferrer">
+            <span class="contact-icon">${contact.icon}</span>
+            <span class="contact-label">${contact.label}</span>
+            <span class="contact-value">${contact.value}</span>
+          </a>
+        `;
+      }).join('');
+    }
+    
+    // Обновление версии
+    const versionEl = document.getElementById('version');
+    if (versionEl) versionEl.textContent = data.version;
+    
+  } catch (error) {
+    console.error('Ошибка загрузки content.json:', error);
   }
 }
 
