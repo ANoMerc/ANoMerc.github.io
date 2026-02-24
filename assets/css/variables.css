@@ -1,0 +1,86 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   ProjectWB — CSS Variables v2.0
+   Глобальные переменные для светлой и тёмной темы
+   ════════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── ТЁМНАЯ ТЕМА (по умолчанию) ── */
+  --bg: #0a0a0b;
+  --surface: #111113;
+  --border: #1e1e22;
+  --border-bright: #2e2e36;
+  --text: #e8e8ee;
+  --muted: #5a5a6e;
+  
+  /* Акцентные цвета (тёмная тема) */
+  --accent: #c8f542;        /* Зелёный — основной */
+  --accent-hover: #d4ff55;
+  --accent2: #42f5c8;       /* Бирюза */
+  --accent3: #f54242;       /* Красный */
+  --accent4: #f5d442;       /* Жёлтый */
+  --accent5: #f542c8;       /* Розовый */
+  
+  /* Курсор */
+  --cursor-bg: #c8f542;
+  --cursor-ring: rgba(200, 245, 66, 0.4);
+  
+  /* Навигация */
+  --nav-bg: rgba(10, 10, 11, 0.92);
+  
+  /* Эффекты */
+  --card-hover-bg: #131316;
+  --card-hover-shadow: rgba(200, 245, 66, 0.4);
+  --contact-hover-shadow: rgba(200, 245, 66, 0.2);
+  
+  /* Типографика */
+  --font-syne: 'Syne', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+[data-theme="light"] {
+  /* ── СВЕТЛАЯ ТЕМА ── */
+  --bg: #e8e8e8;
+  --surface: #fafafa;
+  --border: #d0d0d0;
+  --border-bright: #b0b0b0;
+  --text: #0a0a0b;
+  --muted: #666666;
+  
+  /* Акцентные цвета (светлая тема) */
+  --accent: #c10000;        /* Красный — основной */
+  --accent-hover: #ff1a1a;
+  --accent2: #008b6b;       /* Тёмно-зелёный */
+  --accent3: #c10000;       /* Красный */
+  --accent4: #ff8c00;       /* Оранжевый */
+  --accent5: #c1006b;       /* Розовый */
+  
+  /* Курсор */
+  --cursor-bg: #c10000;
+  --cursor-ring: rgba(193, 0, 0, 0.4);
+  
+  /* Навигация */
+  --nav-bg: rgba(232, 232, 232, 0.92);
+  
+  /* Эффекты */
+  --card-hover-bg: #ffffff;
+  --card-hover-shadow: rgba(193, 0, 0, 0.3);
+  --contact-hover-shadow: rgba(193, 0, 0, 0.2);
+}
+
+/* ── УПРОЩЁННЫЙ РЕЖИМ (доступность) ── */
+body.simplified-mode {
+  --cursor-bg: transparent;
+  --cursor-ring: transparent;
+}
+
+body.simplified-mode .cursor,
+body.simplified-mode .cursor-ring {
+  display: none !important;
+}
+
+body.simplified-mode * {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* ANALYTICS: [PLACEHOLDER] — Вставьте скрипты аналитики здесь */

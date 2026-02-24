@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Кейс 002: Интеграция legacy-систем — когда модель помогла, но не спасла.">
+  <title>Кейс 002 | ProjectWB</title>
+  
+  <!-- ANALYTICS: [PLACEHOLDER] -->
+  
+  <link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="cursor-container"></div>
+  <div id="header-container"></div>
+  
+  <main class="container">
+    <header class="header-group section">
+      <span class="section-eyebrow">002 · Кейс 002 · Enterprise · Финтех · Частичный успех</span>
+      <h1>Интеграция legacy-систем</h1>
+      <p class="tagline">когда модель помогла, но не спасла</p>
+      
+      <div class="skills-grid" style="margin: 24px 0;">
+        <div class="skill-category" style="padding: 16px;">
+          <span class="skill-tag">Индустрия: Финтех / Enterprise</span>
+          <span class="skill-tag">Команда: 30+ человек</span>
+          <span class="skill-tag">Длительность: 9 месяцев</span>
+          <span class="skill-tag">Инструмент: Конструктор + Экосистема</span>
+          <span class="skill-tag">Исход: Частичный</span>
+        </div>
+      </div>
+    </header>
+    
+    <section class="section">
+      <span class="section-eyebrow">01 / Контекст</span>
+      <h2>Крупный банк. Четыре legacy-системы. Одна цель.</h2>
+      <p>Крупная финансовая организация запустила проект интеграции четырёх устаревших систем: АБС (автоматизированная банковская система), CRM, система управления залогами и внешний регуляторный шлюз. Команда — более 30 человек, включая разработчиков, аналитиков, архитекторов и представителей регулятора.</p>
+      <p>Системный подход был применён на 3-м месяце проекта — не с нуля, а как попытка реструктурировать уже начатую работу. Это важный контекст: модель хорошо работает при старте, но требует больше усилий при внедрении в работающий проект.</p>
+    </section>
+    
+    <section class="section">
+      <span class="section-eyebrow">02 / Проблема</span>
+      <h2>Что стало видно после диагностики</h2>
+      <p>Конструктор проектов с параметрами: команда 30 чел., сложность «критическая», 7 внешних зависимостей (включая регуляторные), 4 legacy-системы — выдал прогноз вероятности задержки 94%.</p>
+      
+      <div class="component-wip" style="margin: 24px 0; border-color: var(--accent4); background: rgba(245,212,66,0.1);">
+        <span class="component-wip-icon">⚠</span>
+        <p><strong>Важный момент:</strong> модель выявила регуляторный риск как критический, но команда решила не менять план, надеясь на «привычные» договорённости с регулятором. Это решение дорого обошлось.</p>
+      </div>
+      
+      <div class="timeline-grid reveal" style="margin-top: 32px;">
+        <div class="timeline-item">
+          <span class="timeline-period">Риск</span>
+          <h3 class="timeline-stage">Задержка из-за регулятора</h3>
+          <p class="timeline-tasks">Вероятность: Высокая · Реализовался: Да (+6 недель)</p>
+        </div>
+        
+        <div class="timeline-item">
+          <span class="timeline-period">Риск</span>
+          <h3 class="timeline-stage">Конфликт данных АБС/CRM</h3>
+          <p class="timeline-tasks">Вероятность: Высокая · Реализовался: Нет (митигирован)</p>
+        </div>
+        
+        <div class="timeline-item">
+          <span class="timeline-period">Риск</span>
+          <h3 class="timeline-stage">Недокументированное legacy</h3>
+          <p class="timeline-tasks">Вероятность: Средняя · Реализовался: Частично</p>
+        </div>
+        
+        <div class="timeline-item">
+          <span class="timeline-period">Риск</span>
+          <h3 class="timeline-stage">Перегрузка разработчиков</h3>
+          <p class="timeline-tasks">Вероятность: Средняя · Реализовался: Да</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section">
+      <span class="section-eyebrow">03 / Что сработало</span>
+      <h2>Системный подход дал реальную пользу</h2>
+      <p>Несмотря на итоговую задержку, применение модели дало измеримые улучшения в нескольких областях. Экосистема ПМ с подключёнными Jira и GitHub впервые дала команде единую картину состояния всех четырёх потоков работ.</p>
+      
+      <div class="risks-grid reveal" style="margin-top: 32px;">
+        <div class="risk-item">
+          <span class="risk-name">Видимость рисков</span>
+          <span class="skill-tag">Субъективная → +40% точность</span>
+        </div>
+        
+        <div class="risk-item">
+          <span class="risk-name">Конфликт данных</span>
+          <span class="skill-tag">Не идентифицирован → Митигирован</span>
+        </div>
+        
+        <div class="risk-item">
+          <span class="risk-name">Время на митинги</span>
+          <span class="skill-tag">12 часов/нед → 4 часа/нед</span>
+        </div>
+        
+        <div class="risk-item">
+          <span class="risk-name">Прозрачность</span>
+          <span class="skill-tag">Низкая → Высокая (дашборды)</span>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section">
+      <span class="section-eyebrow">04 / Что не сработало</span>
+      <h2>Где системный подход не помог</h2>
+      <p>Регуляторный риск был идентифицирован правильно — модель поставила ему высокую вероятность реализации. Но ключевые лица приняли решение не менять план и не создавать буфер, опираясь на «личные договорённости».</p>
+      
+      <div class="component-wip" style="margin: 24px 0; border-color: var(--accent3); background: rgba(245,66,66,0.1);">
+        <span class="component-wip-icon">⚠</span>
+        <p><strong>Урок:</strong> Инструмент даёт информацию. Решения принимают люди. Системный подход не заменяет управленческое мужество принять неудобные выводы модели.</p>
+      </div>
+      
+      <p>Когда регулятор запросил дополнительные согласования (что модель предсказала), команда не имела буфера. Дедлайн сдвинулся на 6 недель. Часть команды была переброшена на другой проект. Завершение прошло в режиме кризиса.</p>
+    </section>
+    
+    <section class="section">
+      <span class="section-eyebrow">05 / Уроки</span>
+      <h2>Самые важные выводы этого кейса</h2>
+      
+      <div class="principles-grid reveal" style="margin-top: 32px;">
+        <div class="principle-card">
+          <span class="principle-number">01</span>
+          <h3 class="principle-title">Инструмент бесполезен, если игнорировать выводы</h3>
+          <p class="principle-desc">Модель правильно предсказала регуляторный риск. Решение не закладывать буфер было человеческим, не системным.</p>
+        </div>
+        
+        <div class="principle-card">
+          <span class="principle-number">02</span>
+          <h3 class="principle-title">Внедрение в середине проекта сложнее</h3>
+          <p class="principle-desc">Переформатирование уже начатой работы требует политической воли и дополнительного времени.</p>
+        </div>
+        
+        <div class="principle-card">
+          <span class="principle-number">03</span>
+          <h3 class="principle-title">В regulated-индустриях регуляторный риск — critical</h3>
+          <p class="principle-desc">Независимо от «договорённостей». Буфер — не признак пессимизма, а профессионализма.</p>
+        </div>
+        
+        <div class="principle-card">
+          <span class="principle-number">04</span>
+          <h3 class="principle-title">Даже частичный успех ценен</h3>
+          <p class="principle-desc">Три из четырёх идентифицированных рисков были митигированы. Без модели проект мог бы задержаться на 6 месяцев, а не на 6 недель.</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section" style="border-top: 1px solid var(--border);">
+      <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+        <a href="case-1.html" class="btn-ghost">← Кейс 001</a>
+        <a href="case-3.html" class="btn-primary">Кейс 003 →</a>
+      </div>
+    </section>
+  </main>
+  
+  <div id="footer-container"></div>
+  <div id="theme-toggle-container"></div>
+  
+  <script src="../../assets/js/components.js"></script>
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>

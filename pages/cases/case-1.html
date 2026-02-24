@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Кейс 001: Перезапуск B2B-платформы — с 3 месяцев задержки к 2 неделям буфера.">
+  <title>Кейс 001 | ProjectWB</title>
+  
+  <!-- ANALYTICS: [PLACEHOLDER] -->
+  
+  <link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="cursor-container"></div>
+  <div id="header-container"></div>
+  
+  <main class="container">
+    <header class="header-group section">
+      <span class="section-eyebrow">001 · Кейс 001 · IT / Продукт · B2B SaaS</span>
+      <h1>Перезапуск B2B-платформы</h1>
+      <p class="tagline">с 3 месяцев задержки к 2 неделям буфера</p>
+      
+      <div class="skills-grid" style="margin: 24px 0;">
+        <div class="skill-category" style="padding: 16px;">
+          <span class="skill-tag">Индустрия: IT / B2B SaaS</span>
+          <span class="skill-tag">Команда: 12 человек</span>
+          <span class="skill-tag">Длительность: 6 месяцев</span>
+          <span class="skill-tag">Инструмент: Конструктор проектов</span>
+          <span class="skill-tag">Исход: Успех</span>
+        </div>
+      </div>
+    </header>
+    
+    <section class="section">
+      <span class="section-eyebrow">01 / Контекст</span>
+      <h2>Проект, который уже не верили спасти</h2>
+      <p>Компания разрабатывала enterprise B2B-платформу для автоматизации закупок. Команда — 12 человек: 6 разработчиков, 2 дизайнера, QA, аналитик, ПМ и технический директор.</p>
+      <p>К моменту, когда системный подход был применён, проект уже опаздывал на 3 месяца. Ключевые стейкхолдеры теряли доверие. Разработчики работали сверхурочно, но ощущения прогресса не было.</p>
+      <blockquote style="border-left: 3px solid var(--accent); padding-left: 24px; margin: 24px 0; font-style: italic;">
+        «Мы не понимали, сколько ещё осталось. Каждую неделю говорили "ещё 2 недели" — и это продолжалось месяцами.»<br>
+        <span style="color: var(--muted); font-size: 12px;">— ПМ проекта (анонимно)</span>
+      </blockquote>
+    </section>
+    
+    <section class="section">
+      <span class="section-eyebrow">02 / Проблема</span>
+      <h2>Что было сломано</h2>
+      <p>Диагностика через модель «чёрного ящика» выявила несколько системных проблем, которые не были видны изнутри.</p>
+      
+      <div class="timeline-grid reveal" style="margin-top: 32px;">
+        <div class="timeline-item">
+          <span class="timeline-period">Проблема</span>
+          <h3 class="timeline-stage">Размытый скоуп</h3>
+          <p class="timeline-tasks">Симптом: Задачи появлялись из ниоткуда<br>Корневая причина: Отсутствие формализованного WBS</p>
+        </div>
+        
+        <div class="timeline-item">
+          <span class="timeline-period">Проблема</span>
+          <h3 class="timeline-stage">Неясные роли</h3>
+          <p class="timeline-tasks">Симптом: Конфликты «кто это делает»<br>Корневая причина: RACI не существовал</p>
+        </div>
+        
+        <div class="timeline-item">
+          <span class="timeline-period">Проблема</span>
+          <h3 class="timeline-stage">Точечные оценки</h3>
+          <p class="timeline-tasks">Симптом: Постоянные пересмотры<br>Корневая причина: Нет вероятностного мышления</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section">
+      <span class="section-eyebrow">03 / Решение</span>
+      <h2>Применение системного подхода</h2>
+      
+      <div class="timeline-grid reveal" style="margin-top: 32px;">
+        <div class="timeline-item">
+          <span class="timeline-period">Нед. 1</span>
+          <h3 class="timeline-stage">Диагностика</h3>
+          <p class="timeline-tasks">Генерация модели через Конструктор. Первое за весь проект согласованное WBS из 63 задач.</p>
+        </div>
+        
+        <div class="timeline-item">
+          <span class="timeline-period">Нед. 2</span>
+          <h3 class="timeline-stage">Скоуп-калибровка</h3>
+          <p class="timeline-tasks">Выявлено 18 задач вне критического пути к MVP. Перенесены в v2.0.</p>
+        </div>
+        
+        <div class="timeline-item">
+          <span class="timeline-period">Нед. 3-4</span>
+          <h3 class="timeline-stage">RACI и коммуникации</h3>
+          <p class="timeline-tasks">Внедрение матрицы ответственностей. Стандартизация статусных встреч.</p>
+        </div>
+        
+        <div class="timeline-item">
+          <span class="timeline-period">Нед. 5-12</span>
+          <h3 class="timeline-stage">Управление по модели</h3>
+          <p class="timeline-tasks">Еженедельная калибровка модели по фактическим данным.</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section">
+      <span class="section-eyebrow">04 / Результат</span>
+      <h2>Что изменилось</h2>
+      
+      <div class="risks-grid reveal" style="margin-top: 32px;">
+        <div class="risk-item">
+          <span class="risk-name">Задержки спринта</span>
+          <span class="skill-tag">~45% → ~10% (−78%)</span>
+        </div>
+        
+        <div class="risk-item">
+          <span class="risk-name">Точность прогноза</span>
+          <span class="skill-tag">±40% → ±12%</span>
+        </div>
+        
+        <div class="risk-item">
+          <span class="risk-name">Отставание проекта</span>
+          <span class="skill-tag">3 месяца → 2 недели буфера</span>
+        </div>
+        
+        <div class="risk-item">
+          <span class="risk-name">Время на встречи</span>
+          <span class="skill-tag">8 часов/нед → 2 часа/нед</span>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section">
+      <span class="section-eyebrow">05 / Уроки</span>
+      <h2>Что взять с собой</h2>
+      
+      <div class="principles-grid reveal" style="margin-top: 32px;">
+        <div class="principle-card">
+          <span class="principle-number">01</span>
+          <h3 class="principle-title">Честная диагностика</h3>
+          <p class="principle-desc">Показатель 89% вероятности задержки ударил по самолюбию — но именно это заставило действовать системно.</p>
+        </div>
+        
+        <div class="principle-card">
+          <span class="principle-number">02</span>
+          <h3 class="principle-title">Скоуп важнее скорости</h3>
+          <p class="principle-desc">Перенос 18 задач в v2.0 был принят с сопротивлением. Но именно это сделало запуск возможным.</p>
+        </div>
+        
+        <div class="principle-card">
+          <span class="principle-number">03</span>
+          <h3 class="principle-title">RACI устраняет конфликты</h3>
+          <p class="principle-desc">После внедрения матрицы большинство «политических» конфликтов исчезли.</p>
+        </div>
+        
+        <div class="principle-card">
+          <span class="principle-number">04</span>
+          <h3 class="principle-title">Калибровка важнее точности</h3>
+          <p class="principle-desc">Модель не была идеальной с первого раза — но еженедельная калибровка сделала её точной.</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section" style="border-top: 1px solid var(--border);">
+      <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+        <a href="cases.html" class="btn-ghost">← Все кейсы</a>
+        <a href="case-2.html" class="btn-primary">Следующий кейс →</a>
+      </div>
+    </section>
+  </main>
+  
+  <div id="footer-container"></div>
+  <div id="theme-toggle-container"></div>
+  
+  <script src="../../assets/js/components.js"></script>
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>

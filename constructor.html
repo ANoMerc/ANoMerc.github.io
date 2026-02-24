@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ProjectWB Constructor — Модель проекта за 5 минут. WBS, RACI, план коммуникаций, прогноз сроков.">
+  <title>Конструктор проектов | ProjectWB</title>
+  
+  <!-- ANALYTICS: [PLACEHOLDER] -->
+  
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="cursor-container"></div>
+  <div id="header-container"></div>
+  
+  <main class="container">
+    <header class="header-group section">
+      <span class="section-eyebrow">◆ 01 · Конструктор проектов</span>
+      <h1>Модель проекта за 5 минут.</h1>
+      <p>Введите параметры — получите полный чёрный ящик: артефакты, прогноз сроков, матрицу рисков. Vanilla JS, MIT License.</p>
+      <div class="hero-cta">
+        <a href="pages/tools/project-calculator/index.html" class="btn-primary">Открыть калькулятор →</a>
+        <a href="https://github.com/ANoMerc/projectwb" class="btn-ghost" target="_blank" rel="noopener">GitHub →</a>
+      </div>
+    </header>
+    
+    <section class="section">
+      <span class="section-eyebrow">◆ Проблема → Решение</span>
+      <h2>Что было до. Что стало после.</h2>
+      
+      <div class="timeline-grid reveal" style="margin-top: 32px;">
+        <div class="timeline-item">
+          <span class="timeline-period">До</span>
+          <h3 class="timeline-stage">8 часов ручного планирования</h3>
+          <ul class="timeline-tasks" style="list-style: none; padding: 0;">
+            <li>• WBS вручную в Excel или Notion</li>
+            <li>• RACI за несколько итераций</li>
+            <li>• Прогноз сроков — интуиция</li>
+            <li>• Матрицу рисков пропускают</li>
+          </ul>
+        </div>
+        
+        <div class="timeline-item">
+          <span class="timeline-period">После</span>
+          <h3 class="timeline-stage">5 минут с Конструктором</h3>
+          <ul class="timeline-tasks" style="list-style: none; padding: 0;">
+            <li>• WBS генерируется автоматически</li>
+            <li>• RACI на основе ролей</li>
+            <li>• Вероятностный прогноз P50, P90</li>
+            <li>• Риски по шаблонам</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section">
+      <span class="section-eyebrow">◆ Как работает</span>
+      <h2>Четыре шага до модели</h2>
+      
+      <div class="timeline-grid reveal" style="margin-top: 32px;">
+        <div class="timeline-item">
+          <span class="timeline-period">01 · ~1 мин</span>
+          <h3 class="timeline-stage">Введите параметры</h3>
+          <p class="timeline-tasks">Размер команды, бюджет, сложность, зависимости, регуляторные ограничения.</p>
+        </div>
+        
+        <div class="timeline-item">
+          <span class="timeline-period">02 · ~10 сек</span>
+          <h3 class="timeline-stage">Конструктор строит модель</h3>
+          <p class="timeline-tasks">Алгоритм анализирует данные и строит модель «чёрного ящика».</p>
+        </div>
+        
+        <div class="timeline-item">
+          <span class="timeline-period">03 · ~30 сек</span>
+          <h3 class="timeline-stage">Получите артефакты</h3>
+          <p class="timeline-tasks">WBS, RACI, план коммуникаций, матрица рисков, прогноз сроков.</p>
+        </div>
+        
+        <div class="timeline-item">
+          <span class="timeline-period">04 · ~1 мин</span>
+          <h3 class="timeline-stage">Экспортируйте</h3>
+          <p class="timeline-tasks">JSON для Jira/Linear, Markdown для документации, PDF для стейкхолдеров.</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section">
+      <span class="section-eyebrow">◆ Артефакты</span>
+      <h2>Что вы получите на выходе</h2>
+      
+      <div class="skills-grid reveal" style="margin-top: 32px;">
+        <div class="skill-category">
+          <h3>📊 WBS</h3>
+          <p style="font-size: 13px;">Иерархическая декомпозиция работ с оценками трудозатрат, зависимостями и критическим путём.</p>
+        </div>
+        
+        <div class="skill-category">
+          <h3>📋 RACI</h3>
+          <p style="font-size: 13px;">Матрица ответственностей: Responsible, Accountable, Consulted, Informed для каждой задачи.</p>
+        </div>
+        
+        <div class="skill-category">
+          <h3>📢 COMM</h3>
+          <p style="font-size: 13px;">План коммуникаций: кто, кому, что и как часто сообщает. Шаблоны встреч и отчётов.</p>
+        </div>
+        
+        <div class="skill-category">
+          <h3>⚠️ RISK</h3>
+          <p style="font-size: 13px;">Матрица рисков: идентифицированные риски с вероятностью, влиянием и стратегиями митигации.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <div id="footer-container"></div>
+  <div id="theme-toggle-container"></div>
+  
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

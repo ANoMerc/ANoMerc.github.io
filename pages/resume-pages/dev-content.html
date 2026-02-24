@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Информация для разработчиков — архитектура сайта, стек технологий и API endpoints.">
+  <title>Developer | ProjectWB</title>
+  
+  <!-- ANALYTICS: [PLACEHOLDER] -->
+  
+  <link rel="stylesheet" href="../../assets/css/variables.css">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/resume.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="cursor-container"></div>
+  <div id="header-container"></div>
+  
+  <main class="container">
+    <header class="audience-header">
+      <span class="audience-tag">◆ аудитория · Developer</span>
+      <h1>Информация для Разработчика</h1>
+      <p class="audience-time">Время на чтение: 5–8 минут</p>
+    </header>
+    
+    <section class="section">
+      <span class="section-eyebrow">◆ Архитектура PWB</span>
+      
+      <div class="skills-grid reveal">
+        <div class="skill-category">
+          <h3>⬡ Presentation Layer</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">HTML5</span>
+            <span class="skill-tag">CSS3</span>
+            <span class="skill-tag">Vanilla JS</span>
+          </div>
+        </div>
+        
+        <div class="skill-category">
+          <h3>◫ Data Layer</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">JSON</span>
+            <span class="skill-tag">LocalStorage</span>
+            <span class="skill-tag">Fetch API</span>
+          </div>
+        </div>
+        
+        <div class="skill-category">
+          <h3>◈ Logic Layer</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Component Loader</span>
+            <span class="skill-tag">Event Delegation</span>
+            <span class="skill-tag">State Management</span>
+          </div>
+        </div>
+        
+        <div class="skill-category">
+          <h3>◎ Performance</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">requestAnimationFrame</span>
+            <span class="skill-tag">CSS Variables</span>
+            <span class="skill-tag">Lazy Loading</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section">
+      <span class="section-eyebrow">◆ Алгоритмы</span>
+      
+      <div class="timeline-grid reveal">
+        <div class="timeline-item">
+          <span class="timeline-period">O(1)</span>
+          <h3 class="timeline-stage">Переключение темы</h3>
+          <p class="timeline-tasks">localStorage + data-attribute</p>
+        </div>
+        
+        <div class="timeline-item">
+          <span class="timeline-period">O(n)</span>
+          <h3 class="timeline-stage">Загрузка данных</h3>
+          <p class="timeline-tasks">Fetch API + JSON parse</p>
+        </div>
+        
+        <div class="timeline-item">
+          <span class="timeline-period">O(1)/frame</span>
+          <h3 class="timeline-stage">Курсор (анимация)</h3>
+          <p class="timeline-tasks">requestAnimationFrame 60 FPS</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section">
+      <span class="section-eyebrow">◆ GitHub</span>
+      
+      <div class="card-grid reveal">
+        <article class="card">
+          <span class="section-eyebrow">ANoMerc / ProjectWB</span>
+          <h3>Static Site</h3>
+          <p>No Build · GitHub Pages · MIT License</p>
+          <a href="https://github.com/ANoMerc" class="btn-primary" style="margin-top: 16px; display: inline-block;">Перейти в репозиторий →</a>
+        </article>
+      </div>
+    </section>
+    
+    <div id="contacts-container"></div>
+  </main>
+  
+  <div id="footer-container"></div>
+  <div id="theme-toggle-container"></div>
+  
+  <script src="../../assets/js/components.js"></script>
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>

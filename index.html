@@ -1,31 +1,48 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="dark">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ProjectWB — Чёрный ящик управления</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+  <meta name="description" content="ProjectWB — Системный подход к управлению проектами. Выберите ваш профиль для получения релевантной информации.">
+  <title>Георгий Мясников | ProjectWB Portfolio</title>
+  
+  <!-- ANALYTICS: [PLACEHOLDER] -->
+  
+  <link rel="stylesheet" href="assets/css/variables.css">
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/resume.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Контейнеры компонентов -->
   <div id="cursor-container"></div>
   <div id="header-container"></div>
-
-  <main>
-    <section class="hero">
-      <h1>Проект — это чёрный ящик.<br>Научитесь им управлять.</h1>
-      <p class="tagline">v2.0 · MIT License · Open Source</p>
-      <div class="hero-cta">
-        <a href="tools.html" class="btn-primary">Смотреть инструменты →</a>
-        <a href="resume/index.html" class="btn-ghost">Резюме →</a>
+  
+  <!-- Основной контент -->
+  <main class="container">
+    <header class="header-group section">
+      <span class="section-eyebrow">◆ Портфолио · v2.0</span>
+      <h1>Выберите ваш профиль для получения релевантной информации</h1>
+      <p class="tagline">Адаптивная витрина ценности под 4 типа аудитории</p>
+    </header>
+    
+    <section class="selector-wrapper">
+      <div id="audienceSelector" class="selector-grid">
+        <!-- Аудитории загружаются из content.json через app.js -->
       </div>
     </section>
+    
+    <div id="contacts-container"></div>
   </main>
-
+  
   <div id="footer-container"></div>
-
+  <div id="theme-toggle-container"></div>
+  
+  <!-- Скрипты -->
   <script src="assets/js/components.js"></script>
   <script src="assets/js/app.js"></script>
 </body>

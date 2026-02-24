@@ -1,19 +1,89 @@
-/* === ОБЩИЕ СЕКЦИИ === */
-section {
+/* ════════════════════════════════════════════════════════════════════════════
+   ProjectWB — Component Styles v2.0
+   Стили для переиспользуемых компонентов
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. КОНТАКТЫ ── */
+.contacts-section {
   padding: 80px 48px;
-  max-width: 1400;
+  border-top: 1px solid var(--border);
+}
+
+.contacts-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
-.section-tag {
-  font-family: 'Space Mono', monospace;
-  font-size: 11px;
-  color: var(--accent);
-  margin-bottom: 24px;
-  display: block;
+.contact-block {
+  background: var(--bg);
+  border: 1px solid var(--border-bright);
+  padding: 14px 12px;
+  text-align: center;
+  transition: all 0.2s;
+  text-decoration: none;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
 }
 
-/* === КАРТОЧКИ === */
+.contact-block:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 15px var(--contact-hover-shadow);
+  transform: translateY(-2px);
+}
+
+.contact-icon {
+  font-size: 18px;
+  color: var(--accent);
+}
+
+.contact-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.contact-value {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* ── 2. ФОРМАТ РАБОТЫ ── */
+.format-grid {
+  display: flex;
+  gap: 16px;
+  margin: 32px 0;
+  flex-wrap: wrap;
+}
+
+.format-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text);
+  font-family: var(--font-mono);
+}
+
+.format-check {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.format-cross {
+  color: var(--muted);
+}
+
+/* ── 3. КАРТОЧКИ ── */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -33,99 +103,171 @@ section {
   transform: translateY(-4px);
 }
 
-@media (max-width: 900px) {
-  .card-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  section {
-    padding: 60px 24px;
-  }
-}
-
-@media (max-width: 600px) {
-  .card-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* === АНИМАЦИИ === */
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.65s ease, transform 0.65s ease;
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* === КОНТАКТЫ === */
-.contacts-section {
-  padding: 80px 48px;
-  margin: 0 auto;
-}
-
-.contacts-grid {
+/* ── 4. НАВЫКИ ── */
+.skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 24px;
-  width: 100%;
+  margin: 48px 0;
 }
 
-.contact-block {
-  display: flex;
-  flex-direction: column;
-  padding: 32px;
+.skill-category {
   background: var(--surface);
   border: 1px solid var(--border);
-  text-decoration: none;
-  transition: all 0.3s ease;
-  min-width: 280px;
+  padding: 32px;
 }
 
-.contact-block:hover {
-  border-color: var(--accent);
-  box-shadow: 0 8px 32px var(--contact-hover-shadow);
-  transform: translateY(-4px);
+.skill-category h3 {
+  font-size: 16px;
+  margin-bottom: 16px;
+  color: var(--text);
 }
 
-.contact-icon {
-  font-size: 24px;
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 6px 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+/* ── 5. TIMELINE ── */
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin: 48px 0;
+}
+
+.timeline-item {
+  background: var(--surface);
+  padding: 32px;
+}
+
+.timeline-period {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--accent);
   margin-bottom: 12px;
+  display: block;
+}
+
+.timeline-stage {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.timeline-tasks {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ── 6. ПРИНЦИПЫ ── */
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin: 48px 0;
+}
+
+.principle-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 32px;
+}
+
+.principle-number {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--accent);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.principle-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.principle-desc {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ── 7. РИСКИ ── */
+.risks-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 48px 0;
+}
+
+.risk-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.risk-name {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.risk-level {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 2px;
+}
+
+.risk-level.high {
+  background: rgba(245, 66, 66, 0.1);
+  color: var(--accent3);
+}
+
+.risk-level.medium {
+  background: rgba(200, 245, 66, 0.1);
   color: var(--accent);
 }
 
-.contact-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 11px;
-  color: var(--muted);
-  margin-bottom: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+.risk-level.low {
+  background: rgba(66, 245, 200, 0.1);
+  color: var(--accent2);
 }
 
-.contact-value {
-  font-size: 15px;
-  color: var(--text);
-  word-break: break-word;
-}
-
-/* === АДАПТИВНОСТЬ КОНТАКТОВ === */
+/* ── 8. АДАПТИВНОСТЬ ── */
 @media (max-width: 900px) {
   .contacts-section {
     padding: 60px 24px;
   }
   
   .contacts-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(3, 1fr);
   }
   
-  .contact-block {
-    padding: 24px;
-    min-width: 250px;
+  .skills-grid,
+  .principles-grid,
+  .timeline-grid,
+  .risks-grid,
+  .card-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -135,43 +277,22 @@ section {
   }
   
   .contacts-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .format-grid {
+    flex-direction: column;
     gap: 12px;
   }
-  
-  .contact-block {
-    padding: 20px;
-    min-width: auto;
-    width: 100%;
-  }
-  
-  .contact-value {
-    font-size: 13px;
-  }
 }
 
-/* === ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ === */
-.theme-toggle {
-  background: none;
-  border: 1px solid var(--border);
-  padding: 8px 12px;
-  cursor: pointer;
-  color: var(--text);
-  transition: all 0.2s ease;
-}
-
-.theme-toggle:hover {
-  border-color: var(--accent);
-}
-
-.theme-icon {
-  display: none;
-}
-
-[data-theme="dark"] .theme-icon.moon {
-  display: inline;
-}
-
-[data-theme="light"] .theme-icon.sun {
-  display: inline;
+/* ── 9. ОШИБКА ЗАГРУЗКИ КОМПОНЕНТА ── */
+.component-error {
+  background: rgba(245, 66, 66, 0.1);
+  border: 1px solid var(--accent3);
+  padding: 16px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent3);
+  text-align: center;
 }

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ProjectWB Calculator — Конструктор проектов. Модель проекта за 5 минут. WBS, RACI, план коммуникаций, прогноз сроков.">
+  <title>Конструктор проектов | ProjectWB</title>
+  
+  <!-- ANALYTICS: [PLACEHOLDER] -->
+  
+  <link rel="stylesheet" href="../../../assets/css/variables.css">
+  <link rel="stylesheet" href="../../../assets/css/main.css">
+  <link rel="stylesheet" href="../../../assets/css/components.css">
+  <link rel="stylesheet" href="calculator.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="pwb-calc">
+  <!-- Контейнеры компонентов -->
+  <div id="cursor-container"></div>
+  <div id="header-container"></div>
+  
+  <!-- Основной контент -->
+  <main class="container">
+    <header class="header-group section">
+      <span class="section-eyebrow">◆ 01 · Конструктор проектов · v1.3</span>
+      <h1>Модель проекта за 5 минут</h1>
+      <p>Введите параметры — получите полную модель: WBS, RACI, план коммуникаций, вероятностный прогноз сроков и матрицу рисков.</p>
+      
+      <div class="hero-cta" style="margin-top: 24px;">
+        <button id="expertModeToggle" class="btn-toggle">⚙ Режим эксперта: ВЫКЛ</button>
+        <a href="../tools.html" class="btn-ghost">← Назад к инструментам</a>
+      </div>
+    </header>
+    
+    <section class="section">
+      <div class="calc-grid">
+        <!-- Левая панель: Ввод данных -->
+        <div class="calc-panel">
+          <span class="panel-label">// config.base</span>
+          
+          <form id="calculatorForm">
+            <!-- Базовый размер -->
+            <div class="form-group" id="fg-base-effort">
+              <label class="form-label">
+                Базовый размер проекта
+                <span class="form-value">Story Points или часы</span>
+              </label>
+              <input type="number" id="baseEffort" min="1" max="100000" placeholder="1000" required>
+              <span class="form-hint">Оценочный объём работ без учёта коэффициентов</span>
+              <span class="error-message">Требуется значение больше 0</span>
+            </div>
+            
+            <!-- Методология -->
+            <div class="form-group">
+              <label class="form-label">Методология / Фреймворк</label>
+              <select id="methodology" required>
+                <option value="waterfall">Waterfall (Классическая)</option>
+                <option value="scrum" selected>Scrum / Agile</option>
+                <option value="kanban">Kanban (Flow)</option>
+                <option value="safe">SAFe (Enterprise Agile)</option>
+                <option value="lean">Lean (Оптимизация)</option>
+                <option value="scrumban">Scrumban (Гибрид)</option>
+                <option value="prince2">PRINCE2 (Корпоративный)</option>
+                <option value="pm2">PM² (EU Standard)</option>
+                <option value="hybrid">Hybrid (Scrumfall)</option>
+              </select>
+              <span class="form-hint">Влияет на набор артефактов и коэффициент усилий</span>
+            </div>
+            
+            <!-- Тип PMO -->
+            <div class="form-group">
+              <label class="form-label">Тип PMO / Команды</label>
+              <select id="pmoType" required>
+                <option value="small">Малая команда (до 20 чел.)</option>
+                <option value="corporate" selected>Корпоративный PMO (20+ чел.)</option>
+              </select>
+              <span class="form-hint">Влияет на накладные расходы и скорость принятия решений</span>
+            </div>
+            
+            <!-- Квалификация PM -->
+            <div class="form-group">
+              <label class="form-label">Квалификация Project Manager</label>
+              <select id="pmGrade" required>
+                <option value="junior">Junior PM (×1.2)</option>
+                <option value="middle" selected>Middle PM (×1.0)</option>
+                <option value="senior">Senior PM (×0.85)</option>
+              </select>
+              <span class="form-hint">Опыт и эффективность управления</span>
+            </div>
+            
+            <!-- Состав команды -->
+            <div class="form-group">
+              <label class="form-label">Состав команды</label>
+              <div id="teamRolesContainer" class="team-roles-container"></div>
+              <button type="button" id="addRoleBtn" class="btn-secondary" style="margin-top: 10px;">+ Добавить роль</button>
+            </div>
+            
+            <!-- Фиксированные ограничения -->
+            <div class="form-group">
+              <label class="form-label">Фиксированные ограничения</label>
+              <div class="checkbox-group">
+                <label class="checkbox-item">
+                  <input type="checkbox" id="constraintScope" value="constraintScope">
+                  <div>
+                    <span class="checkbox-label">Содержание (Fixed)</span>
+                    <span class="checkbox-hint">Скоуп не меняется</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" id="constraintTime" value="constraintTime">
+                  <div>
+                    <span class="checkbox-label">Время (Fixed)</span>
+                    <span class="checkbox-hint">Дедлайн фиксирован</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" id="constraintCost" value="constraintCost">
+                  <div>
+                    <span class="checkbox-label">Стоимость (Fixed)</span>
+                    <span class="checkbox-hint">Бюджет ограничен</span>
+                  </div>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" id="constraintQuality" value="constraintQuality">
+                  <div>
+                    <span class="checkbox-label">Качество (Fixed)</span>
+                    <span class="checkbox-hint">Требования к качеству</span>
+                  </div>
+                </label>
+              </div>
+              <span class="form-hint">Влияет на профиль радара ограничений</span>
+            </div>
+            
+            <!-- Экспертный режим: скрытые поля -->
+            <div class="expert-field" style="display: none;">
+              <div class="form-group">
+                <label class="form-label">Фреймворк компетенций PM</label>
+                <select id="competencyFramework">
+                  <option value="none">— Не выбрано —</option>
+                  <option value="icb">ICB (IPMA Competence Baseline)</option>
+                  <option value="pmcd">PMCD (PM Competency Development)</option>
+                  <option value="ocb">OCB (Organizational Competence)</option>
+                  <option value="icm">ICM PMO</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label">ИИ-инструменты для PM</label>
+                <div class="checkbox-group">
+                  <label class="checkbox-item">
+                    <input type="checkbox" id="aiLSTM" value="lstm">
+                    <div>
+                      <span class="checkbox-label">LSTM</span>
+                      <span class="checkbox-hint">Прогнозы сроков (−10%)</span>
+                    </div>
+                  </label>
+                  <label class="checkbox-item">
+                    <input type="checkbox" id="aiCNN" value="cnn">
+                    <div>
+                      <span class="checkbox-label">CNN</span>
+                      <span class="checkbox-hint">Паттерны данных (−5%)</span>
+                    </div>
+                  </label>
+                  <label class="checkbox-item">
+                    <input type="checkbox" id="aiGRU" value="gru">
+                    <div>
+                      <span class="checkbox-label">GRU</span>
+                      <span class="checkbox-hint">Оптимизация (−8%)</span>
+                    </div>
+                  </label>
+                  <label class="checkbox-item">
+                    <input type="checkbox" id="aiMLP" value="mlp">
+                    <div>
+                      <span class="checkbox-label">MLP</span>
+                      <span class="checkbox-hint">Автоматизация (−12%)</span>
+                    </div>
+                  </label>
+                  <label class="checkbox-item">
+                    <input type="checkbox" id="aiRNN" value="rnn">
+                    <div>
+                      <span class="checkbox-label">RNN</span>
+                      <span class="checkbox-hint">Планирование (−7%)</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label">Стандарты ISO / PMI</label>
+                <div class="checkbox-group">
+                  <label class="checkbox-item">
+                    <input type="checkbox" id="std21502" value="iso21502">
+                    <div>
+                      <span class="checkbox-label">ISO 21502</span>
+                      <span class="checkbox-hint">Проекты (+15%)</span>
+                    </div>
+                  </label>
+                  <label class="checkbox-item">
+                    <input type="checkbox" id="std21504" value="iso21504">
+                    <div>
+                      <span class="checkbox-label">ISO 21504</span>
+                      <span class="checkbox-hint">Портфели (+20%)</span>
+                    </div>
+                  </label>
+                  <label class="checkbox-item">
+                    <input type="checkbox" id="std10006" value="iso10006">
+                    <div>
+                      <span class="checkbox-label">ISO 10006</span>
+                      <span class="checkbox-hint">Качество (+10%)</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label">Риск-фреймворки</label>
+                <div class="checkbox-group">
+                  <label class="checkbox-item">
+                    <input type="checkbox" id="riskPRAMG" value="pramg">
+                    <div>
+                      <span class="checkbox-label">PRAMG</span>
+                      <span class="checkbox-hint">Проектные риски</span>
+                    </div>
+                  </label>
+                  <label class="checkbox-item">
+                    <input type="checkbox" id="riskSRMPPP" value="srmppp">
+                    <div>
+                      <span class="checkbox-label">SRMPPP</span>
+                      <span class="checkbox-hint">Корпоративные риски</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Артефакты проекта -->
+            <div class="form-group artifact-section">
+              <label class="form-label">Артефакты проекта по фазам (PMBOK)</label>
+              
+              <div class="phase-tabs" id="phaseTabs">
+                <button type="button" class="phase-tab active" data-phase="initiation">
+                  Инициация
+                  <span class="phase-count" id="count-initiation">0</span>
+                </button>
+                <button type="button" class="phase-tab" data-phase="planning">
+                  Планирование
+                  <span class="phase-count" id="count-planning">0</span>
+                </button>
+                <button type="button" class="phase-tab" data-phase="execution">
+                  Исполнение
+                  <span class="phase-count" id="count-execution">0</span>
+                </button>
+                <button type="button" class="phase-tab" data-phase="monitoring">
+                  Мониторинг
+                  <span class="phase-count" id="count-monitoring">0</span>
+                </button>
+                <button type="button" class="phase-tab" data-phase="closing">
+                  Завершение
+                  <span class="phase-count" id="count-closing">0</span>
+                </button>
+              </div>
+              
+              <div class="phase-content active" id="phase-initiation">
+                <div class="artifact-list" id="artifacts-initiation"></div>
+              </div>
+              <div class="phase-content" id="phase-planning">
+                <div class="artifact-list" id="artifacts-planning"></div>
+              </div>
+              <div class="phase-content" id="phase-execution">
+                <div class="artifact-list" id="artifacts-execution"></div>
+              </div>
+              <div class="phase-content" id="phase-monitoring">
+                <div class="artifact-list" id="artifacts-monitoring"></div>
+              </div>
+              <div class="phase-content" id="phase-closing">
+                <div class="artifact-list" id="artifacts-closing"></div>
+              </div>
+              
+              <div class="artifact-actions">
+                <button type="button" id="selectAllArtifacts" class="btn-secondary">Выбрать все</button>
+                <button type="button" id="deselectAllArtifacts" class="btn-secondary">Снять все</button>
+              </div>
+              
+              <div class="artifact-summary">
+                Выбрано: <span id="selectedCount">0</span> из <span id="totalCount">0</span> артефактов
+                <span style="color: var(--accent);">■</span> рекомендуемые
+              </div>
+            </div>
+            
+            <!-- Параметры расчёта -->
+            <div class="accordion">
+              <div class="accordion-header">
+                <span>⚙ Параметры расчёта</span>
+                <span class="accordion-arrow">+</span>
+              </div>
+              <div class="accordion-content">
+                <div class="form-group">
+                  <label class="form-label">Рабочих дней в неделе</label>
+                  <input type="number" id="workDaysWeek" min="1" max="7" value="5">
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label">
+                    Доступность команды (%)
+                    <span class="form-value" id="teamAvailabilityValue">62.5%</span>
+                  </label>
+                  <input type="range" id="teamAvailability" min="25" max="100" value="62.5" step="12.5">
+                  <span class="form-hint">4–5 часов из 8 = 50–62.5%</span>
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label">Резерв на известные риски (%)</label>
+                  <input type="number" id="knownRiskReserve" min="0" max="50" value="10">
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label">Управленческий резерв (%)</label>
+                  <input type="number" id="managementReserve" min="0" max="30" value="5">
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label">Буфер на форс-мажор (%)</label>
+                  <input type="number" id="edgeCaseBuffer" min="0" max="30" value="15">
+                </div>
+              </div>
+            </div>
+            
+            <button type="button" id="calcBtn" class="btn-primary" disabled>РАССЧИТАТЬ ПРОЕКТ →</button>
+          </form>
+        </div>
+        
+        <!-- Правая панель: Результаты -->
+        <div class="calc-panel">
+          <span class="panel-label">// output.stream</span>
+          
+          <!-- Результаты (скрыты до расчёта) -->
+          <div id="resultContainer" class="result-container" style="display: none;">
+            <div class="result-value" id="durationRange">-- — -- дней</div>
+            <div class="result-sub" id="effortRange">~-- — -- часов трудозатрат</div>
+            
+            <div class="user-journey">
+              <div class="journey-card optimistic">
+                <h4>Оптимистичный</h4>
+                <div class="journey-value" id="journeyOptimistic">-- дней</div>
+                <span class="form-hint">Без рисков, идеальные условия</span>
+              </div>
+              <div class="journey-card base">
+                <h4>Базовый</h4>
+                <div class="journey-value" id="journeyBase">-- дней</div>
+                <span class="form-hint">Стандартные условия</span>
+              </div>
+              <div class="journey-card pessimistic">
+                <h4>Пессимистичный</h4>
+                <div class="journey-value" id="journeyPessimistic">-- дней</div>
+                <span class="form-hint">Крайние риски реализуются</span>
+              </div>
+            </div>
+            
+            <div class="role-loading-bars" id="roleLoadingBars"></div>
+            
+            <div class="radar-container">
+              <div class="radar-title">// профиль ограничений проекта</div>
+              <svg id="radarChart" class="radar-svg" viewBox="0 0 300 300"></svg>
+              <div class="radar-legend">
+                <div class="radar-legend-item">Неопределённость<span id="radar-uncertainty">--%</span></div>
+                <div class="radar-legend-item">Содержание<span id="radar-scope">--%</span></div>
+                <div class="radar-legend-item">Стоимость<span id="radar-cost">--%</span></div>
+                <div class="radar-legend-item">Качество<span id="radar-quality">--%</span></div>
+                <div class="radar-legend-item">Время<span id="radar-time">--%</span></div>
+              </div>
+            </div>
+            
+            <div class="artifact-actions" style="margin-top: 24px;">
+              <button type="button" id="calibrateBtn" class="btn-secondary">Откалибровать по историческому проекту</button>
+              <button type="button" id="exportJSON" class="btn-export">↓ Экспорт JSON</button>
+              <button type="button" id="exportCSV" class="btn-export">↓ Экспорт CSV</button>
+            </div>
+            
+            <div class="warning-box" style="margin-top: 16px;">
+              ⚠ ПОГРЕШНОСТЬ: ±30% на ранних этапах. Коэффициенты требуют калибровки по данным вашей организации.
+            </div>
+          </div>
+          
+          <!-- Заглушка до расчёта -->
+          <div id="placeholderContainer" style="text-align: center; padding: 60px 20px;">
+            <div style="font-size: 48px; margin-bottom: 16px;">🧮</div>
+            <h3 style="margin-bottom: 8px;">Введите параметры проекта</h3>
+            <p style="color: var(--muted);">Заполните форму слева и нажмите «РАССЧИТАТЬ ПРОЕКТ» для получения модели</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- Футер и переключатель темы -->
+  <div id="footer-container"></div>
+  <div id="theme-toggle-container"></div>
+  
+  <!-- Скрипты калькулятора (порядок критичен!) -->
+  <script src="calculator.config.js"></script>
+  <script src="recommendation.engine.js"></script>
+  <script src="calculator.engine.js"></script>
+  <script src="ui.module.js"></script>
+  <script src="form.module.js"></script>
+  <script src="calculator.app.js"></script>
+  
+  <!-- Скрипты сайта -->
+  <script src="../../../assets/js/components.js"></script>
+  <script src="../../../assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,802 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   ProjectWB — Calculator Styles v1.3
+   ИЗОЛИРОВАННЫЕ стили калькулятора (не влияют на основной сайт)
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. ИЗОЛЯЦИЯ (префикс .pwb-calc) ── */
+.pwb-calc *, 
+.pwb-calc *::before, 
+.pwb-calc *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.pwb-calc {
+  font-family: var(--font-syne);
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ── 2. СЕТКА КАЛЬКУЛЯТОРА ── */
+.pwb-calc .calc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  margin-bottom: 40px;
+}
+
+.pwb-calc .calc-panel {
+  background: var(--surface);
+  padding: 40px;
+  position: relative;
+}
+
+.pwb-calc .panel-label {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--accent);
+  padding: 0 8px;
+  transform: translateY(-50%);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── 3. ФОРМЫ ── */
+.pwb-calc .form-group {
+  margin-bottom: 24px;
+}
+
+.pwb-calc .form-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.pwb-calc .form-value {
+  color: var(--accent);
+}
+
+.pwb-calc .form-hint {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--muted);
+  margin-top: 6px;
+  display: block;
+}
+
+.pwb-calc input[type="number"],
+.pwb-calc input[type="text"],
+.pwb-calc select {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border-bright);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  padding: 12px 14px;
+  border-radius: 0;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.pwb-calc input[type="number"]:focus,
+.pwb-calc input[type="text"]:focus,
+.pwb-calc select:focus {
+  border-color: var(--accent);
+}
+
+.pwb-calc input::placeholder {
+  color: var(--muted);
+}
+
+/* ── 4. ЧЕКБОКСЫ ── */
+.pwb-calc .checkbox-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.pwb-calc .checkbox-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 11px;
+  background: var(--bg);
+  border: 1px solid var(--border-bright);
+  transition: border-color 0.2s;
+}
+
+.pwb-calc .checkbox-item:hover {
+  border-color: var(--accent);
+}
+
+.pwb-calc .checkbox-item input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  min-width: 15px;
+  border: 1px solid var(--border-bright);
+  background: var(--bg);
+  position: relative;
+  margin-top: 1px;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.pwb-calc .checkbox-item input[type="checkbox"]:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.pwb-calc .checkbox-item input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  color: #000;
+  font-size: 11px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.pwb-calc .checkbox-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.pwb-calc .checkbox-hint {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--muted);
+  display: block;
+  margin-top: 3px;
+}
+
+/* ── 5. ОШИБКИ ── */
+.pwb-calc .error-message {
+  color: var(--accent3);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  margin-top: 6px;
+  display: none;
+}
+
+.pwb-calc .form-group.error input {
+  border-color: var(--accent3);
+}
+
+.pwb-calc .form-group.error .error-message {
+  display: block;
+}
+
+.pwb-calc .compatibility-warning {
+  background: rgba(245, 212, 66, 0.1);
+  border: 1px solid var(--accent4);
+  padding: 10px;
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--accent4);
+  display: none;
+}
+
+.pwb-calc .compatibility-warning.visible {
+  display: block;
+}
+
+/* ── 6. КНОПКИ ── */
+.pwb-calc .btn-primary,
+.pwb-calc .btn-secondary,
+.pwb-calc .btn-export,
+.pwb-calc .btn-toggle {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 14px 28px;
+  letter-spacing: 0.04em;
+  transition: all 0.2s;
+  border: none;
+  margin-bottom: 0;
+}
+
+.pwb-calc .btn-primary {
+  background: var(--accent);
+  color: #000;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.pwb-calc .btn-primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+.pwb-calc .btn-primary:disabled {
+  background: var(--border-bright);
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.pwb-calc .btn-secondary {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border-bright);
+}
+
+.pwb-calc .btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.pwb-calc .btn-export {
+  background: var(--bg);
+  color: var(--accent2);
+  border: 1px solid var(--border-bright);
+  font-size: 11px;
+  padding: 10px 16px;
+}
+
+.pwb-calc .btn-export:hover {
+  border-color: var(--accent2);
+}
+
+.pwb-calc .btn-toggle {
+  background: var(--bg);
+  color: var(--muted);
+  border: 1px solid var(--border-bright);
+  font-size: 11px;
+  padding: 9px 18px;
+}
+
+.pwb-calc .btn-toggle.active {
+  background: var(--accent);
+  color: #000;
+  border-color: var(--accent);
+}
+
+/* ── 7. РОЛИ КОМАНДЫ ── */
+.pwb-calc .team-roles-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pwb-calc .team-role-item {
+  background: var(--bg);
+  border: 1px solid var(--border-bright);
+  padding: 12px;
+  transition: border-color 0.2s;
+}
+
+.pwb-calc .team-role-item:hover {
+  border-color: var(--border-bright);
+}
+
+.pwb-calc .role-row-main {
+  display: grid;
+  grid-template-columns: 2fr 1fr 60px 34px;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 7px;
+}
+
+.pwb-calc .role-row-extra {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.pwb-calc .team-role-item select,
+.pwb-calc .team-role-item input[type="number"],
+.pwb-calc .team-role-item input[type="text"] {
+  padding: 8px 10px;
+  font-size: 12px;
+}
+
+.pwb-calc .btn-role-remove {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: 1px solid var(--accent3);
+  color: var(--accent3);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.pwb-calc .btn-role-remove:hover {
+  background: var(--accent3);
+  color: #000;
+}
+
+/* ── 8. АРТЕФАКТЫ ── */
+.pwb-calc .artifact-section {
+  margin: 8px 0 24px;
+}
+
+.pwb-calc .phase-tabs {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--border);
+  margin-bottom: 0;
+}
+
+.pwb-calc .phase-tab {
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--bg);
+  border: none;
+  padding: 11px 6px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--muted);
+  text-transform: uppercase;
+  text-align: center;
+  transition: background 0.2s, color 0.2s;
+  line-height: 1.3;
+}
+
+.pwb-calc .phase-tab:hover {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.pwb-calc .phase-tab.active {
+  background: var(--accent);
+  color: #000;
+  font-weight: 700;
+}
+
+.pwb-calc .phase-count {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 3px;
+  color: inherit;
+}
+
+.pwb-calc .phase-tab.active .phase-count {
+  color: #000;
+}
+
+.pwb-calc .phase-content {
+  display: none;
+  border: 1px solid var(--border-bright);
+  border-top: none;
+}
+
+.pwb-calc .phase-content.active {
+  display: block;
+  animation: fadeIn 0.25s ease;
+}
+
+.pwb-calc .artifact-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 12px;
+  background: var(--bg);
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.pwb-calc .artifact-list::-webkit-scrollbar {
+  width: 3px;
+}
+
+.pwb-calc .artifact-list::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+.pwb-calc .artifact-list::-webkit-scrollbar-thumb {
+  background: var(--border-bright);
+}
+
+.pwb-calc .artifact-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  padding: 8px 10px;
+  background: var(--surface);
+  border: 1px solid transparent;
+  border-left: 2px solid transparent;
+  transition: all 0.18s;
+  position: relative;
+}
+
+.pwb-calc .artifact-item:hover {
+  border-color: rgba(200, 245, 66, 0.25);
+  color: var(--text);
+}
+
+.pwb-calc .artifact-item.selected {
+  color: var(--accent);
+  border-color: rgba(200, 245, 66, 0.3);
+  background: rgba(200, 245, 66, 0.04);
+}
+
+.pwb-calc .artifact-item.recommended {
+  border-left-color: var(--accent);
+}
+
+.pwb-calc .artifact-item.recommended.selected {
+  background: rgba(200, 245, 66, 0.07);
+}
+
+.pwb-calc .artifact-checkbox {
+  display: none;
+}
+
+.pwb-calc .artifact-item::before {
+  content: '□';
+  color: var(--border-bright);
+  flex-shrink: 0;
+  font-size: 13px;
+}
+
+.pwb-calc .artifact-item.selected::before {
+  content: '■';
+  color: var(--accent);
+}
+
+.pwb-calc .artifact-name {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.pwb-calc .artifact-rec-badge {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.7;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.pwb-calc .artifact-actions {
+  display: flex;
+  gap: 8px;
+  padding: 10px 0 0;
+  margin-bottom: 20px;
+}
+
+.pwb-calc .artifact-summary {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 9px;
+}
+
+.pwb-calc .artifact-summary span {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ── 9. АККОРДЕОН ── */
+.pwb-calc .accordion {
+  border: 1px solid var(--border-bright);
+  margin: 24px 0 16px;
+}
+
+.pwb-calc .accordion-header {
+  background: var(--bg);
+  padding: 15px 18px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.2s;
+}
+
+.pwb-calc .accordion-header:hover {
+  background: var(--surface);
+}
+
+.pwb-calc .accordion-arrow {
+  color: var(--accent);
+  font-size: 16px;
+}
+
+.pwb-calc .accordion-content {
+  padding: 20px;
+  background: var(--surface);
+  display: none;
+}
+
+.pwb-calc .accordion-content.active {
+  display: block;
+}
+
+/* ── 10. РЕЗУЛЬТАТЫ ── */
+.pwb-calc .result-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 40px 36px;
+  position: relative;
+  margin-top: 1px;
+}
+
+.pwb-calc .result-container::before {
+  content: '// output.stream';
+  position: absolute;
+  top: 0;
+  left: 20px;
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent2);
+  padding: 0 8px;
+  transform: translateY(-50%);
+}
+
+.pwb-calc .result-value {
+  font-family: var(--font-mono);
+  font-size: clamp(22px, 3.5vw, 40px);
+  font-weight: 700;
+  color: var(--accent2);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.pwb-calc .result-sub {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.pwb-calc .user-journey {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+}
+
+.pwb-calc .journey-card {
+  background: var(--bg);
+  padding: 20px;
+  text-align: center;
+}
+
+.pwb-calc .journey-card h4 {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.pwb-calc .journey-value {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.pwb-calc .journey-card.optimistic .journey-value {
+  color: var(--accent2);
+}
+
+.pwb-calc .journey-card.base .journey-value {
+  color: var(--accent);
+}
+
+.pwb-calc .journey-card.pessimistic .journey-value {
+  color: var(--accent3);
+}
+
+.pwb-calc .role-loading-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.pwb-calc .role-loading-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pwb-calc .role-loading-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted);
+  min-width: 200px;
+  flex: 1;
+}
+
+.pwb-calc .role-loading-label em {
+  font-style: normal;
+}
+
+.pwb-calc .role-loading-track {
+  width: 120px;
+  height: 6px;
+  background: var(--bg);
+  border: 1px solid var(--border-bright);
+  flex-shrink: 0;
+}
+
+.pwb-calc .role-loading-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.3s;
+}
+
+.pwb-calc .role-loading-value {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+/* ── 11. РАДАР ── */
+.pwb-calc .radar-container {
+  margin: 32px 0 0;
+  padding: 22px;
+  background: var(--bg);
+  border: 1px solid var(--border-bright);
+}
+
+.pwb-calc .radar-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 14px;
+}
+
+.pwb-calc .radar-svg {
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+  display: block;
+}
+
+.pwb-calc .radar-legend {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.pwb-calc .radar-legend-item {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.pwb-calc .radar-legend-item span {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 3px;
+}
+
+/* ── 12. WARNING ── */
+.pwb-calc .warning-box {
+  padding: 14px 16px;
+  border: 1px dashed var(--accent3);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--accent3);
+  background: rgba(245, 66, 66, 0.04);
+}
+
+/* ── 13. АНИМАЦИИ ── */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pwb-calc .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.pwb-calc .reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── 14. МОБИЛЬНАЯ АДАПТАЦИЯ ── */
+@media (max-width: 900px) {
+  .pwb-calc .calc-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .pwb-calc .artifact-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .pwb-calc .user-journey {
+    grid-template-columns: 1fr;
+  }
+  
+  .pwb-calc .checkbox-group {
+    grid-template-columns: 1fr;
+  }
+  
+  .pwb-calc .radar-legend {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .pwb-calc .phase-tabs {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .pwb-calc .role-row-main {
+    grid-template-columns: 1fr 1fr 50px 34px;
+  }
+  
+  .pwb-calc .role-row-extra {
+    grid-template-columns: 1fr;
+  }
+  
+  .pwb-calc .role-loading-bar {
+    flex-wrap: wrap;
+  }
+  
+  .pwb-calc .role-loading-label {
+    min-width: 100%;
+  }
+  
+  .pwb-calc .role-loading-track {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .pwb-calc .calc-panel {
+    padding: 24px;
+  }
+  
+  .pwb-calc .phase-tabs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
